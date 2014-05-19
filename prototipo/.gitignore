@@ -1,0 +1,7 @@
+*.o
+test-red-serial
+test-ibm
+test-large-case
+neural-gpu
+neural-gpu-cublas
+parallel-test-case

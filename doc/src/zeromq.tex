@@ -1,0 +1,35 @@
+\section{ZeroMQ}
+
+The current message-passing implementation based on the ZeroMQ library
+ the following details.
+
+\begin{description}
+    \item [Transport:]
+        TCP transport is used,
+        because it is one of the best transports methods implemented
+        in the last version of ZeroMQ.
+    \item [Infrastructure:]
+        The \emph{Queue} infrastructure is used,
+        which is used to implement a client/server model.
+    \item [Messaging pattern:]
+        The \emph{Request/Response} model was selected,
+        which is unidirectional communication from a client
+        to servers. This model implies synchronization between the \texttt{send()}
+        and the \texttt{recv()} method, ensuring that no messages will be lost.
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.85\textwidth]{img/zeromq.pdf}
+            \caption{ZeroMQ interaction diagram}
+        \end{figure}
+\end{description}
+
+\subsection*{Default values}
+
+The current version uses some default values to do the
+connection between the clients and servers.
+
+Both communication use the \texttt{TCP} protocol
+and the \texttt{127.0.0.1} IP address,
+but the connection between the \texttt{Input} and the \texttt{GPUControllerService}
+use the port \texttt{5000} and the connection between the \texttt{GPUControllerService}
+and the \texttt{Output} use the port \texttt{5050}.

@@ -1,0 +1,41 @@
+\documentclass[letter, 11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage[dvips]{graphicx}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{fullpage}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{fancyvrb}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{mathpazo}
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\definecolor{red}{rgb}{1,0,0}
+\definecolor{green}{rgb}{0,1,0}
+\definecolor{blue}{rgb}{0,0,1}
+\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\green}{\textcolor{green}}
+
+\onehalfspacing
+
+\begin{document}
+  \include{src/portada}
+  \tableofcontents
+  %\include{src/introduction}
+  %\include{src/team}
+  \include{src/algorithm}
+  \include{src/zeromq}
+  \include{src/execution}
+  %\section{Referencias}
+  %\bibliography{references}
+\end{document}

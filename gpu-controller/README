@@ -1,0 +1,26 @@
+GPU Neural Network Processing
+-----------------------------
+
+
+INTRODUCTION
+
+The GPU Controller is a class to calculate a feedforward network FFN.
+
+FILES
+
+
+Class GPUController
+	GPUController c(N, H, M);
+	c.load_parameters("model-directory") // model-directory is the directory where the files weights_ih.txt and weights_ho.txt are. 
+	c.push(input, N)                     // input is a pointer to the input data and N is its size
+	float *output = c.get_output()       // return a pointer to the output data
+
+
+COMPILING AND RUNNING
+
+The compilation and running will take place in the cluster as a job.
+
+% cd gpu-controller/ 
+% qsub send-cluster.sh
+
+

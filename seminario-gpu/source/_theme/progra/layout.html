@@ -1,0 +1,55 @@
+{% extends "basic/layout.html" %}
+
+{% block doctype %}
+<!doctype html>
+{% endblock %}
+
+{%- block relbar1 %}
+  <div class="panel">
+    {%- block rootrellink %}
+    <p class="rootlink">
+      Seminario GPU
+    </p>
+    {%- endblock %}
+
+    {#
+    {%- for parent in parents %}
+    <p>
+      <a href="{{ parent.link|e }}" title="{{ parent.title }}">{{ parent.title }}</a>
+    </p>
+    {%- endfor %}
+    #}
+
+    <hr>
+
+    <p>
+      <a href="{{ pathto('index.html', 1) }}" title="Inicio">Inicio</a>
+      <br>
+      <a href="{{ pathto('index.html', 1) }}" title="Índice">Índice</a>
+    </p>
+
+    <hr>
+
+    <p>
+      {%- if prev %}
+        ←
+        <a href="{{ prev.link|e }}" title="{{ prev.title }}"
+           {{ accesskey(prev.link) }}>anterior</a>
+      {%- endif %}
+      {% if prev and next %} | {% endif %}
+      {%- if next %}
+        <a href="{{ next.link|e }}" title="{{ next.title }}"
+           {{ accesskey(next.link) }}>siguiente</a>
+        →
+      {%- endif %}
+    </p>
+  </div>
+{% endblock %}
+
+{%- block relbar2 %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{# vim: set ft=htmldjango sw=2: #}

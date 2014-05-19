@@ -1,0 +1,4 @@
+*.o
+test-controller
+gpu_controller_prototype.o*
+gpu_controller_prototype.e*

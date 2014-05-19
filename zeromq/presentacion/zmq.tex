@@ -1,0 +1,112 @@
+\documentclass{beamer}
+\usepackage[spanish,activeacute]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[procnames]{listings}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{textcomp}
+\usepackage{setspace}
+\usepackage{palatino}
+
+\definecolor{red}{RGB}{255,0,0}
+\definecolor{green}{RGB}{0,255,0}
+\definecolor{blue}{RGB}{0,0,255}
+\definecolor{oran}{RGB}{255,93,0}
+
+\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\green}{\textcolor{green}}
+\newcommand{\oran}{\textcolor{oran}}
+\newcommand{\gray}{\textcolor{gray}}
+
+
+\renewcommand{\lstlistlistingname}{Code Listings}
+\renewcommand{\lstlistingname}{Code Listing}
+\definecolor{gray}{gray}{0.5}
+\definecolor{green}{rgb}{0,0.5,0}
+\definecolor{lightgreen}{rgb}{0,0.7,0}
+\definecolor{purple}{rgb}{0.5,0,0.5}
+\definecolor{darkred}{rgb}{0.5,0,0}
+\definecolor{orange}{rgb}{1,0.5,0}
+\lstnewenvironment{python}[1][]{%%%% Included this
+\lstset{
+language=python,
+ basicstyle=\ttfamily\small\setstretch{1},
+ stringstyle=\color{green},
+ showstringspaces=false,
+ alsoletter={1234567890},
+ otherkeywords={\ , \}, \{},
+ keywordstyle=\color{blue},
+ emph={access,and,as,break,class,continue,def,del,elif,else,%
+ except,exec,finally,for,from,global,if,import,in,is,%
+ lambda,not,or,pass,print,raise,return,try,while,assert},
+ emphstyle=\color{orange}\bfseries,
+ emph={[2]self},
+ emphstyle=[2]\color{gray},
+ emph={[4]ArithmeticError,AssertionError,AttributeError,BaseException,%
+DeprecationWarning,EOFError,Ellipsis,EnvironmentError,Exception,%
+False,FloatingPointError,FutureWarning,GeneratorExit,IOError,%
+ImportError,ImportWarning,IndentationError,IndexError,KeyError,%
+KeyboardInterrupt,LookupError,MemoryError,NameError,None,%
+NotImplemented,NotImplementedError,OSError,OverflowError,%
+PendingDeprecationWarning,ReferenceError,RuntimeError,RuntimeWarning,%
+StandardError,StopIteration,SyntaxError,SyntaxWarning,SystemError,%
+SystemExit,TabError,True,TypeError,UnboundLocalError,UnicodeDecodeError,%
+UnicodeEncodeError,UnicodeError,UnicodeTranslateError,UnicodeWarning,%
+UserWarning,ValueError,Warning,ZeroDivisionError,abs,all,any,apply,%
+basestring,bool,buffer,callable,chr,classmethod,cmp,coerce,compile,%
+complex,copyright,credits,delattr,dict,dir,divmod,enumerate,eval,%
+execfile,exit,file,filter,float,frozenset,getattr,globals,hasattr,%
+hash,help,hex,id,input,int,intern,isinstance,issubclass,iter,len,%
+license,list,locals,long,map,max,min,object,oct,open,ord,pow,property,%
+quit,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,%
+slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,%
+vars,xrange,zip},
+ emphstyle=[4]\color{purple}\bfseries,
+ upquote=true,
+ morecomment=[s][\color{lightgreen}]{"""}{"""},
+ commentstyle=\color{red}\slshape,
+ literate={>>>}{\textbf{\textcolor{darkred}{>{>}>}}}3%
+          {...}{{\textcolor{gray}{...}}}3,
+ procnamekeys={def,class},
+ procnamestyle=\color{blue}\textbf,
+framexleftmargin=1mm, framextopmargin=1mm, frame=shadowbox,
+rulesepcolor=\color{gray},
+ breaklines=true,
+ #1
+}}{}%%%%Here it was missing }
+
+\usetheme[pageofpages=of,% String used between the current page and the
+                         % total page count.
+          alternativetitlepage=true,% Use the fancy title page.
+          titlepagelogo=img/zeromq,% Logo for the first page.
+          watermark=img/cti_hpc-500-off,% Watermark used in every page.
+          watermarkheight=50px,% Height of the watermark.
+          watermarkheightmult=1,% The watermark image is 4 times bigger
+                                % than watermarkheight.
+          ]{Torino}
+
+\usecolortheme{nouvelle}
+\vspace{-0.5cm}
+\author[C. Maureira]{\large Cristián Maureira\\\normalsize \textcolor{gray}{cmaureir@hpc.cl}}
+\title[ØMQ]{\huge ØMQ: The Intelligent Transport Layer}
+%\subtitle{Universidad Técnica Federico Santa María}
+\institute[UTFSM]{Universidad Técnica Federico Santa María}
+\date{\today}
+
+
+
+
+
+\begin{document}
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+\include{src/introduccion}
+\include{src/capamensaje}
+\include{src/ejemplos}
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+\end{document}

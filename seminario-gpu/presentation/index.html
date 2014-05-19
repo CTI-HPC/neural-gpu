@@ -1,0 +1,111 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> GPU seminary </title>
+  <meta name="author" content="Roberto Bonvallet">
+  <meta name="viewport" content="width=1024, user-scalable=no">
+
+  <link rel="stylesheet" href="deckjs/core/deck.core.css">
+  <link rel="stylesheet" href="deckjs/extensions/goto/deck.goto.css">
+  <link rel="stylesheet" href="deckjs/extensions/menu/deck.menu.css">
+  <link rel="stylesheet" href="deckjs/extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" href="deckjs/extensions/status/deck.status.css">
+  <link rel="stylesheet" href="deckjs/extensions/hash/deck.hash.css">
+  <link rel="stylesheet" href="deckjs/extensions/hash/deck.hash.css">
+  <!--<link rel="stylesheet" href="deckjs/themes/style/web-2.0.css">-->
+  <link rel="stylesheet" href="deckjs/themes/transition/fade.css">
+  <script src="deckjs/modernizr.custom.js"></script>
+</head>
+
+<body class="deck-container">
+
+  <section class="slide">
+    <h1> IFITEC&ndash;CTI-HPC <br> GPU seminary </h1>
+    <img src="http://hpc.cl/cti-hpc.png">
+  </section>
+
+  <section class="slide">
+    <h2> Architecture of the GPU </h2>
+    <img src="architecture-0.svg">
+  </section>
+
+  <section class="slide">
+    <h2> Architecture of the GPU </h2>
+    <img src="architecture.svg">
+  </section>
+
+  <section class="slide">
+    <h2> NVIDIA Tesla M2050 </h2>
+    <ul>
+    </ul>
+      <li><strong>Peak performance (single precision):</strong> 1030 Gflops
+      <li><strong>Peak performance (double precision):</strong>  515 Gflops
+      <li><strong>Memory bandwidth:</strong> 148 GB/s
+      <li><strong>Number of cores: </strong> 448 = 14 MP of 32
+      <li><strong>Global memory:</strong> 3 GB
+    </table>
+  </section>
+
+  <section class="slide">
+    <h2> First example: vector sum (c ← a + b)</h2>
+    <img src="thread-blocks-1.svg">
+  </section>
+
+  <section class="slide">
+    <h2> First example: vector sum (c ← a + b)</h2>
+    <img src="thread-blocks-2.svg">
+  </section>
+
+  <section class="slide">
+    <h2> First example: vector sum (c ← a + b)</h2>
+    <img src="thread-blocks-2.svg">
+    <pre>
+<strong>__global__ void</strong> add(<strong>float</strong> *a, <strong>float</strong> *b, <strong>float</strong> *c) {
+    <strong>int</strong> i = threadIdx.x + blockDim.x * blockIdx.x;
+
+    c[i] = a[i] + b[i];
+}
+    </pre>
+  </section>
+
+  <section class="slide">
+    <h2> Kernel launch </h2>
+    <pre>
+float  ah[N], bh[N], ch[N];
+float *ad,   *bd,   *cd;
+
+cudaMalloc((void **) &amp;ad, N * sizeof(float));
+cudaMalloc((void **) &amp;bd, N * sizeof(float));
+cudaMalloc((void **) &amp;cd, N * sizeof(float));
+
+cudaMemcpy(ad, ah, N * sizeof(float), cudaMemcpyHostToDevice);
+cudaMemcpy(bd, bh, N * sizeof(float), cudaMemcpyHostToDevice);
+
+add&lt;&lt;&lt;N / 512, 512&gt;&gt;&gt;(ad, bd, cd);
+
+cudaMemcpy(ch, cd, N * sizeof(float), cudaMemcpyDeviceToHost);
+
+cudaFree(ad);
+cudaFree(bd);
+cudaFree(cd);
+    </pre>
+  </section>
+
+  <script src="//ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="deckjs/jquery-1.7.min.js"><\/script>')</script>
+  <script src="deckjs/core/deck.core.js"></script>
+  <script src="deckjs/extensions/hash/deck.hash.js"></script>
+  <script src="deckjs/extensions/menu/deck.menu.js"></script>
+  <script src="deckjs/extensions/goto/deck.goto.js"></script>
+  <script src="deckjs/extensions/status/deck.status.js"></script>
+  <script src="deckjs/extensions/navigation/deck.navigation.js"></script>
+
+  <!-- Initialize the deck -->
+  <script>
+    $(function() { $.deck('.slide'); });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+\begin{frame}
+    \frametitle{Implementando capa de mensajes}
+    \framesubtitle{Pasos}
+    \begin{itemize}
+        \item Elegir un transporte.
+        \item Establecer la infraestructura.
+        \item Seleccionar un patrón de mensajería.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implementando capa de mensajes}
+    \framesubtitle{Elegir un transporte}
+    \begin{itemize}
+        \item \blue{INPROC}, modelo de comunicación ``in-process''. (entre hebras)
+        \item \blue{IPC}, modelo de comunicación ``inter-process'' (entre procesos)
+        \item \blue{MULTICAST}, modelo de comunicación basado en PGM/UDP (entre computadores).
+        \item \red{TCP}, transporte basado en red, unicast (en un computador)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implementando capa de mensajes}
+    \framesubtitle{Establecer la infraestructura}
+    \begin{itemize}
+        \item Utilizando \red{BIND/CONNECT}.
+        \item \blue{QUEUE}, request/response.
+        \item \blue{FORWARDER}, publish/subscribe.
+        \item \blue{STREAMER}, pipeline.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Implementando capa de mensajes}
+    \framesubtitle{Seleccionar un patrón de mensajería}
+    \begin{itemize}
+        \item \blue{REQUEST/REPLY}, bidireccional y balanceo de carga.
+        \item \blue{PUBLISH/SUBSCRIBE}, publicar a varios destinatarios.
+        \item \blue{UPSTREAM/DOWNSTREAM}, distribuir datos en nodos de un pipeline.
+        \item \blue{PAIR}, comunicación entre ``peers''.
+    \end{itemize}
+\end{frame}

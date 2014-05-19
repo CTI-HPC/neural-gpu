@@ -1,0 +1,6 @@
+[submodule "seminario-gpu/presentation/deckjs"]
+	path = seminario-gpu/presentation/deckjs
+	url = git://github.com/imakewebthings/deck.js.git
+[submodule "seminario-gpu/presentation/prettify"]
+	path = seminario-gpu/presentation/prettify
+	url = git://github.com/pvorb/google-code-prettify.git

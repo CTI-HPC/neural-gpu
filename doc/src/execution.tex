@@ -1,0 +1,111 @@
+\section{Controller execution}
+
+\subsection*{Models creation}
+
+A simple way to create models to try the controller,
+is using the \texttt{create-test-model.py} script,
+located in \texttt{test-models/}.
+
+The required parameters are:
+
+\begin{verbatim}
+    ./create-test-model.py NR-INPUT NR-HIDDEN NR-OUTPUT -n NAME
+\end{verbatim}
+
+\begin{itemize}
+    \item \texttt{NR-INPUT:} Number of input neurons.
+    \item \texttt{NR-HIDDEN:} Number of hidden neurons.
+    \item \texttt{NR-OUTPUT:} Number of output neurons.
+    \item \texttt{NR-NAME:} Optional model name.
+\end{itemize}
+
+The execution will place the new ``model'' directory
+into the \texttt{test-models/} directory.
+
+\subsection*{Testing the controller}
+
+The simplest controller test file is located in the \texttt{test-controller/} directory.
+After the tests compilation, you can look the options of the test file,
+executing:
+
+\begin{verbatim}
+ui02~/test-controller $ ./test-controller -h
+Allowed options:
+  -h [ --help ]         Produce help message
+  -d [ --data ] arg     Path to the data directory
+  -p [ --prob ] arg     Use an activation function on the «output» vector
+  -m [ --method ] arg   Execution method «gpu» (default) or «cpu»
+  -i [ --iter ] arg     Number of iterations to obtain the execution time
+  -t [ --threads ] arg  Number of threads for the GPU implementation
+\end{verbatim}
+
+The mandatory option, is the data directory location, thus the simple execution will be:
+
+\begin{verbatim}
+    ./test-controller -d /path/to/data/directory
+\end{verbatim}
+
+Additionally, it's possible to choose if the output need to be probabilistic or real,
+also the execution could be serial, executing in the forward pass method on the CPU,
+and finally to generate outputs focused on the performance study,
+it's possible to select the number of iterations, to sample the time more precisely,
+or the number of threads in the GPU execution.
+
+\subsection*{Testing the GPU Controller Service}
+
+This implementation consider the use of the \texttt{GPUController} through
+the previous ZeroMQ model.
+
+There are three necessary components to execute the \texttt{GPU Controller Service},
+which need to be executed in different Linux terminals.
+
+\subsubsection*{Input}
+
+The \texttt{Input} functionality is to load the "input data" and send it
+using to the \texttt{GPUControllerService}.
+
+To load the input data,
+it is necessary to pass the data directory path as parameter.
+
+\begin{verbatim}
+ui02~/gpu-controller-service $ ./input-sender -d /path/to/data/directory
+\end{verbatim}
+
+\subsubsection*{GPUControllerService}
+
+The \texttt{GPUControllerService} functionality is to send the "input data"
+to the \texttt{GPUController} which perform all the calculation on the GPU device.
+
+\begin{verbatim}
+ui02~/gpu-controller-service $ ./gpu-controller-service -d /path/to/data/directory
+\end{verbatim}
+
+Additionally, there are some extra options to execute the \texttt{GPUControllerService}
+which are:
+\begin{itemize}
+    \item Use an activation function on the output vector.
+    \item Change the default calculation method from GPU to the CPU.
+    \item Number of threads of the GPU implementation.
+\end{itemize}
+
+The details can be showed, typing:
+\begin{verbatim}
+ui02~/gpu-controller-service $ ./gpu-controller-service -h
+\end{verbatim}
+
+\subsubsection*{Output}
+
+The \texttt{Output} functionality is to receive the "output data",
+which is the "input data" processed by the neural network.
+
+\begin{verbatim}
+ui02~/gpu-controller-service $ ./output-receiver
+\end{verbatim}
+
+It is very important to perform this execution in the properly order,
+which is:
+\begin{itemize}
+    \item ./output-receiver
+    \item ./gpu-controller-service -d /path/to/data/directory/
+    \item ./input-sender -d /path/to/data/directory/
+\end{itemize}
